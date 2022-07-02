@@ -14,18 +14,20 @@
 
     <template #header2>
       <div class="cont3">
-        <img
-          :src="require('@/assets/logoC.png')"
-          width="100%"
-          class="bg-img1"
-        />
+        <a href="./">
+          <img
+            :src="require('@/assets/logoC.png')"
+            width="100%"
+            class="bg-img1"
+          />
+        </a>
         <div class="cont2">
           <h1 contenido1>{{ "CoCo's" }}</h1>
           <h1 contenido2>{{ "BURGER" }}</h1>
         </div>
-        <div class="a">
-          <h2 contenido3>{{"TERMINOS Y CONDICIONES DE LA WEB"}}</h2>
       </div>
+      <div class="terminos-condiciones">
+        <h2 contenido3>{{ "TERMINOS Y CONDICIONES DE LA WEB" }}</h2>
       </div>
       <div class="cont4">
         <img
@@ -33,19 +35,50 @@
           width="100%"
           class="bg-img1"
         />
-        <a contenido2>{{ "INGRESAR" }}</a>
+        <a href="./VistaLogin.vue" contenido2>{{ "INGRESAR" }}</a>
       </div>
     </template>
     <template #content>
-      <div class="paf">
-        <p>
-            Al comprar un artículo, aceptas que: (i) eres responsable de leer el listado completo del artículo antes de comprometerte a comprarlo: (ii) celebras un contrato legalmente vinculante para comprar un artículo cuando te comprometed a comprar un artículo y completar el proceso de check-out.
-
- Los precios que cobramos por usar nuestros servicios / para nuestros productos se enumeran en  la página web. Nos reservamos el derecho de cambiar nuestros precios para los productos que se muestran en cualquier momento y de corregir los errores de precios que pueden ocurrir inadvertidamente. Información adicional sobre precios e impuestos sobre las ventas está disponible en la página de pagos. 
-
-"La tarifa por los servicios y cualquier otro cargo que pueda incurrir en relación con tu uso del servicio, como los impuestos y las posibles tarifas de transacción, se cobrarán mensualmente a tu método de pago.
+      <div class="parrafo-content">
+        <p class="parrafo-titulo">
+          Autorización de acuerdo a Términos y Condiciones
         </p>
-       
+        <p class="parrafo">
+          El cliente declara que la información es veraz y ser mayor de 18 años.
+          Asimismo, autoriza a CocosBurger S.A.C, con R.U.C. Nº 20101087647, con
+          domicilio en Calle Camino Real N° 1801, Mz. A, Lt. 4, Santiago de
+          Surco, Lima (“NGR”), a afiliarlo al programa de Beneficiarios de
+          Promociones para que Usted pueda recibir descuentos y promociones para
+          usarlos en sus compras futuras (el “Programa”). Autorización para el
+          tratamiento de Datos Personales: La información proporcionada al
+          inscribirse y participar en el programa y aquella obtenida con
+          anterioridad por cualquier medio (público o de terceros), incluyendo
+          su historial de compras en NGR (pasadas, presentes y futuras), así
+          como las que se brinden a través de cualquier medio de venta, es
+          considerada datos personales. Usted nos da su consentimiento libre,
+          previo, expreso e informado, de forma indefinida para conservar de
+          manera segura y tratar sus datos personales en nuestro banco de datos
+          “CLIENTES” (código N° 15000), con la finalidad de: i) ejecutar el
+          Programa, realizar estudios de mercado, registrar y analizar
+          historiales de compra y elaborar perfiles de compra, efectuar acciones
+          de publicidad y prospección comercial, ofrecimiento de promociones
+          comerciales, fines estadísticos o históricos, comercio electrónico,
+          remitir (vía medio físico, electrónico o telefónico) publicidad,
+          obsequios, información de ofertas y/o promociones (personalizadas o
+          generales) de productos y/o servicios, para lo cual NGR podrá valerse
+          de los terceros (encargados de tratamiento) difundidos en
+          www.CocosBurger.com.pe/encargados-del-tratamiento, situados dentro y
+          fuera del Perú, por lo que se producirá una transferencia
+          internacional de datos; y ii) Ceder, transferir, o comunicar sus datos
+          personales, a nivel nacional y/o transfronterizo a las empresas del
+          Grupo Intercorp y sus Socios Estratégicos difundidas en
+          www.CocosBurger.com.pe/empresas, a efecto de que dichas empresas
+          realicen para sí mismas los tratamientos indicados en el ítem i). El
+          CLIENTE podrá ejercitar los derechos de información, acceso,
+          actualización, rectificación, inclusión, cancelación, oposición y
+          tratamiento objetivo que le confiere la Ley No. 29733, y su
+          Reglamento; a través del portal web www.CocosBurger.com.pe/arco
+        </p>
       </div>
     </template>
 
@@ -121,10 +154,9 @@ import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 
 import CardLayout from "@/layouts/CardLayout.vue";
-import DataTable from "@/components/datatable/Datatable.vue";
 
 const store = useStore();
-const currentRoute = computed(() => store.getters.getCurrentRouteActive);
+
 </script>
 
 <script>
@@ -134,6 +166,13 @@ export default {
 </script>
 
 <style lang="scss">
+.terminos-condiciones {
+  h2 {
+    color: red;
+    font-size: 30px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+}
 .logofooter {
   display: flex;
   flex-direction: row;
@@ -169,11 +208,15 @@ export default {
         text-align: center;
         a {
           font-weight: bold;
-          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          font-family: "Franklin Gothic Medium", "Arial Narrow", Arial,
+            sans-serif;
           font-size: 25px;
           padding: 2px;
           text-decoration: none;
           color: #ffff;
+          &:hover {
+            color: red;
+          }
         }
       }
     }
@@ -183,16 +226,16 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    h1{
-    font-weight: bold;
-    font-family: Titan One;
-    font-size: 40px;
-    position: relative;
-    //line-height: 1;
-    
-    color: white;
+    h1 {
+      font-weight: bold;
+      font-family: Titan One;
+      font-size: 40px;
+      position: relative;
+      //line-height: 1;
+
+      color: white;
     }
-    .iconos{
+    .iconos {
       display: flex;
       align-items: center;
       gap: 30px;
@@ -207,7 +250,7 @@ export default {
 .bg-img {
   width: 100%;
   height: 476px;
-  object-fit:fill;
+  object-fit: fill;
   height: calc(100vh - 500px);
 }
 
@@ -243,6 +286,11 @@ export default {
   a {
     margin-left: 30px;
     font-size: 25px;
+    text-decoration: none;
+    color: #ffff;
+    &:hover {
+      color: red;
+    }
   }
   img {
     width: 50px;
@@ -282,22 +330,21 @@ h1 {
   }
 }
 
-.h {
-  width: 100%;
-  height: 4px;
-  border: 0 none;
-  background-color: black;
+.parrafo-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  p {
+    letter-spacing: 1px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+  .parrafo-titulo {
+    padding-top: 50px;
+    text-decoration: underline;
+    font-size: 20px;
+  }
+  .parrafo {
+    padding: 40px 400px 30px 400px;
+  }
 }
-.paf p{
-  align-content: center;
-  right: 100px;
-  border: 1px solid #73AD21;
-  padding: 50px;
-}
-.a h2{
-  
-   color: red;
-   font-size: 2.875em;
-   font-family:normal;
-   }
 </style>

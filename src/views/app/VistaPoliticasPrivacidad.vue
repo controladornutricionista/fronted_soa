@@ -14,18 +14,20 @@
 
     <template #header2>
       <div class="cont3">
-        <img
-          :src="require('@/assets/logoC.png')"
-          width="100%"
-          class="bg-img1"
-        />
+        <a href="./">
+          <img
+            :src="require('@/assets/logoC.png')"
+            width="100%"
+            class="bg-img1"
+          />
+        </a>
         <div class="cont2">
           <h1 contenido1>{{ "CoCo's" }}</h1>
           <h1 contenido2>{{ "BURGER" }}</h1>
         </div>
       </div>
-      <div class="a">
-          <h2 contenido3>{{"POLITICAS DE PRIVACIDAD"}}</h2>
+      <div class="terminos-condiciones">
+        <h2 contenido3>{{ "POLÍTICAS DE PRIVACIDAD" }}</h2>
       </div>
       <div class="cont4">
         <img
@@ -33,19 +35,47 @@
           width="100%"
           class="bg-img1"
         />
-        <a contenido2>{{ "INGRESAR" }}</a>
+        <a href="./VistaLogin.vue" contenido2>{{ "INGRESAR" }}</a>
       </div>
     </template>
     <template #content>
-      <div class="paf">
-        <p>
-            Al comprar un artículo, aceptas que: (i) eres responsable de leer el listado completo del artículo antes de comprometerte a comprarlo: (ii) celebras un contrato legalmente vinculante para comprar un artículo cuando te comprometed a comprar un artículo y completar el proceso de check-out.
-
- Los precios que cobramos por usar nuestros servicios / para nuestros productos se enumeran en  la página web. Nos reservamos el derecho de cambiar nuestros precios para los productos que se muestran en cualquier momento y de corregir los errores de precios que pueden ocurrir inadvertidamente. Información adicional sobre precios e impuestos sobre las ventas está disponible en la página de pagos. 
-
-"La tarifa por los servicios y cualquier otro cargo que pueda incurrir en relación con tu uso del servicio, como los impuestos y las posibles tarifas de transacción, se cobrarán mensualmente a tu método de pago.
+      <div class="parrafo-content">
+        <p class="parrafo-titulo">POLÍTICA DE PRIVACIDAD GENERAL</p>
+        <p class="parrafo">
+          Por medio del presente documento, DELOSI S.A. (en adelante, “DELOSI”)
+          pone a disposición de los usuarios su Política de Privacidad, la cual
+          se encuentra en armonía con la normativa vigente sobre protección de
+          Datos Personales (Ley N° 29733 y Decreto Supremo 003-2013-JUS). A
+          continuación, se señalan las finalidades de tratamiento de la
+          información que usted nos ha suministrado, quiénes son los encargados
+          de tratarla, el tiempo de almacenamiento en nuestras Bases de Datos,
+          las medidas de seguridad, y los medios para ejercer sus derechos como
+          titular de los Datos Personales.
         </p>
-       
+        <p class="parrafo1-1">1. ¿Qué información recopilamos?</p>
+        <p class="parrafo1">
+          Recolectamos la siguiente información personal: <br />
+          1.1.Respecto de los datos personales de nuestros Clientes: nombre,
+          apellidos, documento nacional de identidad, teléfono, correo
+          electrónico, dirección y voz. <br />1.2. Respecto a los datos
+          personales de nuestros Usuarios Web: nombre, apellidos, documento
+          nacional de identidad, teléfono, correo electrónico y dirección.<br />
+          1.3. Respecto de los datos personales de Postulantes: nombres,
+          apellidos, documento nacional de identidad, pasaporte, carné de
+          extranjería, firma, nacionalidad, sexo, edad, fecha de nacimiento,
+          estado civil, profesión, dirección, teléfono, correo electrónico,
+          imagen, datos académicos, datos de derechohabientes, experiencia
+          laboral, e historial d créditos.<br /> 1.4. Respecto de los datos personales
+          de Trabajadores: nombres, apellidos, documento nacional de identidad,
+          pasaporte, carnet de extranjería, voz, firma, sexo, edad, fecha de
+          nacimiento, estado civil, nacionalidad, profesión, dirección,
+          teléfono, correo electrónico, datos académicos, datos de
+          derechohabientes, datos de persona de contacto, experiencia laboral,
+          datos bancarios, historial crediticio, información tributaria,
+          seguros, planes de pensiones y jubilación, ingresos económicos,
+          información relativa a la salud física y mental, huella dactilar y
+          beneficios recibidos de programas sociales.
+        </p>
       </div>
     </template>
 
@@ -55,17 +85,17 @@
           <div class="interno">
             <div class="nt">
               <a href="./VistaNosotros.vue" contenido1>{{ "Nosotros" }}</a>
-              <a contenido2
+              <a href="./VistaTerminos.vue" contenido2
                 >{{ "Terminos y condiciones" }} <br />
                 {{ "de la web" }}</a
               >
             </div>
             <div class="nt">
-              <a contenido1
+              <a href="./VistaPoliticasDelivery.vue" contenido1
                 >{{ "Politicas de" }} <br />
                 {{ "delivery" }}</a
               >
-              <a contenido2
+              <a href="./VistaPoliticasPrivacidad.vue" contenido2
                 >{{ "Politicas de" }} <br />
                 {{ "privacidad" }}</a
               >
@@ -121,7 +151,6 @@ import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 
 import CardLayout from "@/layouts/CardLayout.vue";
-import DataTable from "@/components/datatable/Datatable.vue";
 
 const store = useStore();
 const currentRoute = computed(() => store.getters.getCurrentRouteActive);
@@ -134,6 +163,13 @@ export default {
 </script>
 
 <style lang="scss">
+.terminos-condiciones {
+  h2 {
+    color: red;
+    font-size: 30px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+}
 .logofooter {
   display: flex;
   flex-direction: row;
@@ -169,11 +205,15 @@ export default {
         text-align: center;
         a {
           font-weight: bold;
-          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          font-family: "Franklin Gothic Medium", "Arial Narrow", Arial,
+            sans-serif;
           font-size: 25px;
           padding: 2px;
           text-decoration: none;
           color: #ffff;
+          &:hover {
+            color: red;
+          }
         }
       }
     }
@@ -183,16 +223,16 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    h1{
-    font-weight: bold;
-    font-family: Titan One;
-    font-size: 40px;
-    position: relative;
-    //line-height: 1;
-    
-    color: white;
+    h1 {
+      font-weight: bold;
+      font-family: Titan One;
+      font-size: 40px;
+      position: relative;
+      //line-height: 1;
+
+      color: white;
     }
-    .iconos{
+    .iconos {
       display: flex;
       align-items: center;
       gap: 30px;
@@ -207,7 +247,7 @@ export default {
 .bg-img {
   width: 100%;
   height: 476px;
-  object-fit:fill;
+  object-fit: fill;
   height: calc(100vh - 500px);
 }
 
@@ -243,6 +283,11 @@ export default {
   a {
     margin-left: 30px;
     font-size: 25px;
+    text-decoration: none;
+    color: #ffff;
+    &:hover {
+      color: red;
+    }
   }
   img {
     width: 50px;
@@ -282,22 +327,30 @@ h1 {
   }
 }
 
-.h {
-  width: 100%;
-  height: 4px;
-  border: 0 none;
-  background-color: black;
+.parrafo-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  p {
+    letter-spacing: 1px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+  .parrafo-titulo {
+    padding-top: 50px;
+    text-decoration: underline;
+    font-size: 20px;
+  }
+  .parrafo {
+    padding: 40px 400px 30px 400px;
+    text-align: justify;
+  }
+  .parrafo1 {
+    padding: 0px 300px 30px 300px;
+    text-align: justify;
+  }
+  .parrafo1-1{
+    padding: 0px 300px 5px 300px;
+    text-align: justify;
+  }
 }
-.paf p{
-  align-content: center;
-  right: 100px;
-  border: 1px solid #73AD21;
-  padding: 50px;
-}
-.a h2{
-  
-   color: red;
-   font-size: 2.875em;
-   font-family:normal;
-   }
 </style>

@@ -14,13 +14,15 @@
 
     <template #header2>
       <div class="cont3">
-        <img
-          :src="require('@/assets/logoC.png')"
-          width="100%"
-          class="bg-img1"
-        />
+        <a href="./">
+          <img
+            :src="require('@/assets/logoC.png')"
+            width="100%"
+            class="bg-img1"
+          />
+        </a>
         <div class="cont2">
-          <h1 href="./VistaPrincipal.vue" contenido1>{{ "CoCo's" }}</h1>
+          <h1 contenido1>{{ "CoCo's" }}</h1>
           <h1 contenido2>{{ "BURGER" }}</h1>
         </div>
       </div>
@@ -116,7 +118,7 @@ import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 
 import CardLayout from "@/layouts/CardLayout.vue";
-import DataTable from "@/components/datatable/Datatable.vue";
+
 
 const store = useStore();
 const currentRoute = computed(() => store.getters.getCurrentRouteActive);
@@ -164,11 +166,15 @@ export default {
         text-align: center;
         a {
           font-weight: bold;
-          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          font-family: "Franklin Gothic Medium", "Arial Narrow", Arial,
+            sans-serif;
           font-size: 25px;
           padding: 2px;
           text-decoration: none;
           color: #ffff;
+          &:hover {
+            color: red;
+          }
         }
       }
     }
@@ -178,16 +184,16 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    h1{
-    font-weight: bold;
-    font-family: Titan One;
-    font-size: 40px;
-    position: relative;
-    //line-height: 1;
-    
-    color: white;
+    h1 {
+      font-weight: bold;
+      font-family: Titan One;
+      font-size: 40px;
+      position: relative;
+      //line-height: 1;
+
+      color: white;
     }
-    .iconos{
+    .iconos {
       display: flex;
       align-items: center;
       gap: 30px;
@@ -202,7 +208,7 @@ export default {
 .bg-img {
   width: 100%;
   height: 476px;
-  object-fit:fill;
+  object-fit: fill;
   height: calc(100vh - 500px);
 }
 
@@ -238,6 +244,11 @@ export default {
   a {
     margin-left: 30px;
     font-size: 25px;
+    text-decoration: none;
+    color: #ffff;
+    &:hover {
+      color: red;
+    }
   }
   img {
     width: 50px;

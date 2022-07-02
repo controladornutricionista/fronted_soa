@@ -142,6 +142,8 @@ const toggleCollapse = () => {
     transition: all ease-in-out 0.15s;
     display: flex;
     justify-content: space-between;
+    text-align: center;
+    align-items: center;
     &--hover:hover {
       background: var(--color-primary-500);
       cursor: pointer;
