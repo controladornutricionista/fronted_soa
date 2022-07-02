@@ -1,0 +1,109 @@
+{
+  "application": {
+    "title": "App de Coco's BURGUER",
+    "description": "App de Coco's BURGUER",
+    "author": "",
+    "logo": "/theme/imgs/logo.svg"
+  },
+  "forms": {
+    "inputStyle": {
+      "variant": "outlined",
+      "background": "#fff",
+      "color": "#072146"
+    },
+    "login": {
+      "title": "Bienvenido",
+      "subtitle": "Inicie sesión con su usuario y contraseña",
+      "usuario": {
+        "label": "Usuario",
+        "placeholder": "",
+        "min": 4,
+        "max": 30,
+        "type": "text"
+      },
+      "password": {
+        "label": "Contraseña",
+        "placeholder": "",
+        "min": 4,
+        "max": 30,
+        "type": "password"
+      },
+      "button": {
+        "label": "Ingresar"
+      },
+      "image": "/theme/imgs/logoLogin.jpg"
+    },
+    "documentManagement": {
+      "rButtons": {
+        "doi": {
+          "label": "DOI",
+          "value": "doi",
+          "placeholder": "85458569",
+          "mask": "###############",
+          "type": "text"
+        },
+        "centralCode": {
+          "label": "Código central",
+          "value": "centralCode",
+          "placeholder": "000081554545454",
+          "mask": "###############",
+          "type": "text"
+        }
+      }
+    },
+    "pendingDocument": {
+      "contractCode": {
+        "label": "N. Contrato",
+        "value": "contractCode",
+        "placeholder": "000081554545454",
+        "mask": "##################",
+        "type": "text"
+      },
+      "dischargeDate": {
+        "label": "Fecha de Alta",
+        "value": "dischargeDate",
+        "placeholder": "12/05/2022",
+        "mask": "####-##-##",
+        "type": "date"
+      }
+    },
+    "clientProfile": {
+      "doi": {
+        "label": "DOI",
+        "value": "doi",
+        "placeholder": "85458569",
+        "mask": "###############",
+        "type": "text"
+      },
+      "centralCode": {
+        "label": "Código central",
+        "value": "centralCode",
+        "placeholder": "000081554545454",
+        "mask": "###############",
+        "type": "text"
+      }
+    }
+  },
+  "clientProfile": {
+    "title": "Perfil cliente",
+    "tabs": [
+      {
+        "value": "perfil-cliente",
+        "title": "Perfíl cliente"
+      },
+      {
+        "value": "file-cliente",
+        "title": "File cliente"
+      },
+      {
+        "value": "documentos-cliente",
+        "title": "Documentos base cliente"
+      }
+    ]
+  },
+  "copyrigth": {
+    "anio": 2022,
+    "nombre": "Anonymous",
+    "enlace": "#"
+  }
+}
