@@ -19,10 +19,7 @@
                   />
                 </clipPath>
                 <clipPath id="cordClip">
-                  <rect
-                    width="800"
-                    height="600"
-                  />
+                  <rect width="800" height="600" />
                 </clipPath>
               </defs>
 
@@ -427,54 +424,16 @@
                   />
                 </g>
                 <g id="circlesSmall">
-                  <circle
-                    fill="#0E0620"
-                    cx="549.879"
-                    cy="296.402"
-                    r="2.651"
-                  />
-                  <circle
-                    fill="#0E0620"
-                    cx="253.29"
-                    cy="229.24"
-                    r="2.651"
-                  />
-                  <circle
-                    fill="#0E0620"
-                    cx="434.824"
-                    cy="263.931"
-                    r="2.651"
-                  />
-                  <circle
-                    fill="#0E0620"
-                    cx="183.708"
-                    cy="544.176"
-                    r="2.651"
-                  />
-                  <circle
-                    fill="#0E0620"
-                    cx="382.515"
-                    cy="530.923"
-                    r="2.651"
-                  />
-                  <circle
-                    fill="#0E0620"
-                    cx="130.693"
-                    cy="305.608"
-                    r="2.651"
-                  />
-                  <circle
-                    fill="#0E0620"
-                    cx="480.296"
-                    cy="477.014"
-                    r="2.651"
-                  />
+                  <circle fill="#0E0620" cx="549.879" cy="296.402" r="2.651" />
+                  <circle fill="#0E0620" cx="253.29" cy="229.24" r="2.651" />
+                  <circle fill="#0E0620" cx="434.824" cy="263.931" r="2.651" />
+                  <circle fill="#0E0620" cx="183.708" cy="544.176" r="2.651" />
+                  <circle fill="#0E0620" cx="382.515" cy="530.923" r="2.651" />
+                  <circle fill="#0E0620" cx="130.693" cy="305.608" r="2.651" />
+                  <circle fill="#0E0620" cx="480.296" cy="477.014" r="2.651" />
                 </g>
               </g>
-              <g
-                id="spaceman"
-                clip-path="url(cordClip)"
-              >
+              <g id="spaceman" clip-path="url(cordClip)">
                 <path
                   id="cord"
                   fill="none"
@@ -733,7 +692,7 @@ import { useRoute, useRouter } from "vue-router";
 import { ref } from "vue";
 
 const route = useRoute();
-const router = useRouter()
+const router = useRouter();
 const { pathMatch } = route.params;
 const dictionary = {
   504: {
@@ -783,8 +742,8 @@ const dictionary = {
             de inicio.`,
   },
 };
-const currentError = dictionary[pathMatch] || dictionary["default"]
-const redirectToRoute = (path) => router.push(path).catch(() => {})
+const currentError = dictionary[pathMatch] || dictionary["default"];
+const redirectToRoute = (path) => router.push(path).catch(() => {});
 </script>
 
 <style lang="scss" scoped>

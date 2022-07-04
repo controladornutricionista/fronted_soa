@@ -3,7 +3,7 @@
     "title": "App de Coco's BURGUER",
     "description": "App de Coco's BURGUER",
     "author": "",
-    "logo": "/theme/imgs/logo.svg"
+    "logo": "/theme/imgs/logoC.png"
   },
   "forms": {
     "inputStyle": {
@@ -12,27 +12,33 @@
       "color": "#072146"
     },
     "login": {
+      "image": "/theme/imgs/logoLogin.jpg",
       "title": "Bienvenido",
-      "subtitle": "Inicie sesión con su usuario y contraseña",
+      "subtitle": "INICIO DE SESIÓN",
       "usuario": {
-        "label": "Usuario",
+        "label": "USUARIO",
         "placeholder": "",
         "min": 4,
-        "max": 30,
+        "max": 150,
         "type": "text"
       },
       "password": {
-        "label": "Contraseña",
+        "label": "CONTRASEÑA",
         "placeholder": "",
         "min": 4,
         "max": 30,
         "type": "password"
       },
       "button": {
-        "label": "Ingresar"
+        "label": "INGRESAR"
       },
-      "image": "/theme/imgs/logoLogin.jpg"
+      "button2": {
+        "label": "REGISTRARSE"
+      }
     },
+
+
+
     "documentManagement": {
       "rButtons": {
         "doi": {
@@ -51,6 +57,7 @@
         }
       }
     },
+
     "pendingDocument": {
       "contractCode": {
         "label": "N. Contrato",

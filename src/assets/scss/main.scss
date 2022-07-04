@@ -73,13 +73,14 @@ td {
   font-weight: 600;
   text-transform: uppercase;
   width: auto;
+  
 
   &.search__button {
     background: var(--color-fondo-search);
   }
 
   &.rounded {
-    border-radius: var(--border-radius-lg);
+    border-radius: 50%;
   }
   span {
     color: white;

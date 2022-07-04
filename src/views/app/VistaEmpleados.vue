@@ -26,23 +26,55 @@
           <h1 contenido2>{{ "BURGER" }}</h1>
         </div>
       </div>
+      <div class="centro-header">
+        <h2 contenido3>{{ "NOSOTROS" }}</h2>
+      </div>
       <div class="cont4">
         <img
           :src="require('@/assets/avatarLogin.png')"
           width="100%"
           class="bg-img1"
         />
-        <a href="../auth/VistaLogin" contenido2>{{ "INGRESAR" }}</a>
+        <a href="./VistaLogin.vue" contenido2>{{ "INGRESAR" }}</a>
       </div>
     </template>
+
     <template #content>
       <div class="wrapper__init">
-        <img
-          :src="require('@/assets/ImagenPrincipal.jpg')"
-          width="100%"
-          height="100%"
-          class="bg-img"
-        />
+        <div class="header-contenido">
+          <p1>¿Cómo nació CoCo's BURGER?</p1>
+        </div>
+        <hr class="h" />
+        <div class="main-contenido">
+          <div class="main-imagen">
+            <img :src="require('@/assets/coco.jpg')" class="bg-img" />
+          </div>
+          <div class="parrafos">
+            <p class="parrafointerno">
+              En 1988 un par de jóvenes empresarios peruanos decidió incursionar
+              en un mercado poco difundido hasta el momento en el Perú: el
+              mercado de las hamburguesas. En ese momento existían cadenas
+              nacionales que ofrecían hamburguesas dentro de su menú, pero no se
+              había desarrollado el hábito de consumo de hamburguesa en el
+              público peruano ni habían llegado al país las grandes cadenas
+              internacionales. Estos jóvenes empresarios no conocían el negocio
+              pero les gustaban las hamburguesas y tenían muchas ganas y
+              convicción en sacar adelante su proyecto. Es así que el 11 de
+              Junio de 1988 nació CocosBurger en un local alquilado del corazón
+              de Miraflores y comenzaron a trabajar en su objetivo de preparar
+              la mejor hamburguesa del Perú. El éxito fue inmediato, pues además
+              del excelente producto CocosBurger contaba con un ambiente
+              divertido, una moderna decoración y un excelente servicio. Debido
+              a esta gran acogida, en 1990 se inaugura también con éxito sin
+              precedentes el segundo local de CocosBurger en San Isidro, de allí
+              en adelante el crecimiento sería constante. Cuando las grandes
+              cadenas internacionales de hamburguesas llegaron al Perú
+              CocosBurger ya estaba posicionada en el mercado y la competencia
+              los motivó a ser más innovadores y eficientes, logrando mantener
+              el liderazgo en el mercado.
+            </p>
+          </div>
+        </div>
       </div>
     </template>
 
@@ -51,18 +83,18 @@
         <div class="contfooter1">
           <div class="interno">
             <div class="nt">
-              <a href="./VistaNosotros" contenido1>{{ "Nosotros" }}</a>
-              <a href="./VistaTerminos" contenido2
+              <a href="./VistaNosotros.vue" contenido1>{{ "Nosotros" }}</a>
+              <a href="./VistaTerminos.vue" contenido2
                 >{{ "Terminos y condiciones" }} <br />
                 {{ "de la web" }}</a
               >
             </div>
             <div class="nt">
-              <a href="./VistaPoliticasDelivery" contenido1
+              <a href="./VistaPoliticasDelivery.vue" contenido1
                 >{{ "Politicas de" }} <br />
                 {{ "delivery" }}</a
               >
-              <a href="./VistaPoliticasPrivacidad" contenido2
+              <a href="./VistaPoliticasPrivacidad.vue" contenido2
                 >{{ "Politicas de" }} <br />
                 {{ "privacidad" }}</a
               >
@@ -72,7 +104,7 @@
           <div class="logofooter">
             <img
               :src="require('@/assets/logoC.png')"
-              width="100%"
+              width="50%"
               class="bg-img1"
             />
             <h3 contenido1>{{ "CoCo's BURGER" }}</h3>
@@ -119,18 +151,46 @@ import { computed } from "@vue/runtime-core";
 
 import CardLayout from "@/layouts/CardLayout.vue";
 
-
 const store = useStore();
-const currentRoute = computed(() => store.getters.getCurrentRouteActive);
 </script>
 
 <script>
 export default {
-  name: "VistaPrincipal",
+  name: "VistaEmpleados",
 };
 </script>
 
 <style lang="scss">
+.main-contenido {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  padding-bottom: 0px;
+  .main-imagen {
+    width: 50%;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    img {
+      margin: 0px auto;
+      width: 60%;
+      padding: 30px;
+    }
+  }
+  .parrafos {
+    width: 50%;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    .parrafointerno {
+      margin: 0px auto;
+      padding-right: 100px;
+    }
+  }
+}
+
 .logofooter {
   display: flex;
   flex-direction: row;
@@ -206,10 +266,9 @@ export default {
   }
 }
 .bg-img {
-  width: 100%;
-  height: 476px;
-  object-fit: fill;
+  width: 50%;
   height: calc(100vh - 500px);
+  border-radius: 800px;
 }
 
 .bg-img1 {
@@ -276,7 +335,7 @@ h1 {
   position: relative;
   margin-bottom: 0px;
   padding-bottom: 0px;
-  margin-bottom: -7px;
+  margin-bottom: -30px;
 
   &::after {
     content: "";
@@ -293,5 +352,14 @@ h1 {
   height: 4px;
   border: 0 none;
   background-color: black;
+}
+.centro-header h2 {
+  color: red;
+  font-size: 40px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.header-contenido{
+  padding-left: 50px;
 }
 </style>

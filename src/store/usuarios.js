@@ -3,8 +3,6 @@ import http from "@/plugins/axios";
 const state = {
   users: [],
   roles: [],
-  pacientes: [],
-  misPacientes: [],
 };
 
 const getters = {
@@ -13,50 +11,20 @@ const getters = {
       return { ...user, orden: idx + 1 };
     }),
   getRoles: (state) => state.roles,
-  getMisPacientesList: state => state.misPacientes,
-  getPacientesList: (state) =>
-    state.pacientes.map((user, idx) => {
-      return { ...user, orden: idx + 1 };
-    }),
   };
   
   const mutations = {
     setUsers: (state, users) => (state.users = users),
     setRoles: (state, roles) => (state.roles = roles),
-    setPacientesList: (state, pacientes) => (state.pacientes = pacientes),
-    setMisPacientes: (state, pacientes) => state.misPacientes = pacientes
 };
 
 const actions = {
-  obtenerUsuario: async ({}, pacienteId) => {
-    const { data, status } = await http.get(`/usuarios/${pacienteId}`);
-    if (status != 200) return null; 
-    return data.body
-  },
-  listarMisPacientes: async ({ commit, getters }) => {
-    const nutricionistaId = getters.getIdUsuario
-    const { data, status } = await http.get(`/usuarios/pacientes/${nutricionistaId}`);
-    if (status != 200) return;
-    console.log(data.body);
-    commit(
-      "setMisPacientes",
-      data.body.map((paciente, idx) => { return { ...paciente, orden: idx +1 }})
-    );
-  },
-  listarPacientes: async ({ commit }) => {
-    const { data, status } = await http.get("/usuarios");
-    if (status != 200) return;
-    commit(
-      "setPacientesList",
-      data.body.filter((user) => user?.rol?.nombre == "Cliente")
-    );
-  },
   listarUsuarios: async ({ commit }) => {
     const { data, status } = await http.get("/usuarios");
     if (status != 200) return;
     commit(
       "setUsers",
-      data.body.filter((user) => user?.rol?.nombre != "Cliente")
+      data.body.filter((user) => user?.rol?.nombre != "Empleado")
     );
   },
   crearUsuario: async ({}, usuario) => {
@@ -71,19 +39,6 @@ const actions = {
   },
   eliminarUsuario: async ({}, userId) => {
     const { data, status } = await http.delete(`/usuarios/${userId}`);
-    if (status != 200 && status != 201) return false;
-    return true;
-  },
-  crearPersona: async ({}, persona) => {
-    const { data, status } = await http.post("/personas", persona);
-    if (status != 200 && status != 201) return false;
-    return data.body;
-  },
-  editarPersona: async ({}, persona) => {
-    const { data, status } = await http.put(
-      `/personas/${persona._id}`,
-      persona
-    );
     if (status != 200 && status != 201) return false;
     return true;
   },

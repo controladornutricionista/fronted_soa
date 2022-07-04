@@ -8,37 +8,61 @@ const router = createRouter({
   routes: [
     {
       path: "/:pathMatch(.*)*",
-      component: () => import("@/views/ErrorPage")
+      component: () => import("@/views/ErrorPage"),
     },
     {
       path: "/",
       name: "VistaPrincipalPage",
-      component: () => import("@/views/app/VistaPrincipal")
+      component: () => import("@/views/app/VistaPrincipal"),
+      meta: { transition: "fade" },
     },
     {
-      path: "/VistaNosotros.vue",
-      name: "VistaNosotros",
-      component: () => import("@/views/app/VistaNosotros")
+      path: "/VistaNosotros",
+      name: "Nosotros",
+      component: () => import("@/views/app/VistaNosotros"),
+      meta: { transition: "fade" },
     },
     {
-      path: "/VistaTerminos.vue",
-      name: "VistaTerminos",
-      component: () => import("@/views/app/VistaTerminos")
+      path: "/VistaTerminos",
+      name: "Terminos",
+      component: () => import("@/views/app/VistaTerminos"),
+      meta: { transition: "fade" },
     },
     {
-      path: "/VistaPoliticasPrivacidad.vue",
-      name: "VistaPoliticasPrivacidad",
-      component: () => import("@/views/app/VistaPoliticasPrivacidad")
+      path: "/VistaPoliticasPrivacidad",
+      name: "PoliticasPrivacidad",
+      component: () => import("@/views/app/VistaPoliticasPrivacidad"),
+      meta: { transition: "fade" },
     },
     {
-      path: "/VistaPoliticasDelivery.vue",
-      name: "VistaPoliticasDelivery",
-      component: () => import("@/views/app/VistaPoliticasDelivery")
+      path: "/VistaPoliticasDelivery",
+      name: "PoliticasDelivery",
+      component: () => import("@/views/app/VistaPoliticasDelivery"),
+      meta: { transition: "fade" },
     },
     {
-      path: "/VistaLogin.vue",
-      name: "VistaLogin",
-      component: () => import("@/views/app/VistaLogin")
+      path: "/auth/VistaLogin",
+      name: "AuthLogin",
+      beforeEnter: verifyAuth,
+      component: () => import("@/views/auth/VistaLogin"),
+      meta: { transition: "fade" },
+    },
+    {
+      path: "/Login",
+      component: Home,
+      beforeEnter: verifyAuth,
+      children: [
+        {
+          path: "/Login",
+          name: "Home",
+          component: () => import("@/views/app/Home"),
+        },
+        {
+          path: "/VistaEmpleados",
+          name: "VistaEmpleados",
+          component: () => import("@/views/app/VistaEmpleados"),
+        },
+      ],
     },
   ],
 });

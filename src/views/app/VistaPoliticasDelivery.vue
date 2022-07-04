@@ -35,7 +35,7 @@
           width="100%"
           class="bg-img1"
         />
-        <a href="./VistaLogin.vue" contenido2>{{ "INGRESAR" }}</a>
+        <a href="../auth/VistaLogin" contenido2>{{ "INGRESAR" }}</a>
       </div>
     </template>
     <template #content>
@@ -83,18 +83,18 @@
         <div class="contfooter1">
           <div class="interno">
             <div class="nt">
-              <a href="./VistaNosotros.vue" contenido1>{{ "Nosotros" }}</a>
-              <a href="./VistaTerminos.vue" contenido2
+              <a href="./VistaNosotros" contenido1>{{ "Nosotros" }}</a>
+              <a href="./VistaTerminos" contenido2
                 >{{ "Terminos y condiciones" }} <br />
                 {{ "de la web" }}</a
               >
             </div>
             <div class="nt">
-              <a href="./VistaPoliticasDelivery.vue" contenido1
+              <a href="./VistaPoliticasDelivery" contenido1
                 >{{ "Politicas de" }} <br />
                 {{ "delivery" }}</a
               >
-              <a href="./VistaPoliticasPrivacidad.vue" contenido2
+              <a href="./VistaPoliticasPrivacidad" contenido2
                 >{{ "Politicas de" }} <br />
                 {{ "privacidad" }}</a
               >
@@ -157,7 +157,7 @@ const currentRoute = computed(() => store.getters.getCurrentRouteActive);
 
 <script>
 export default {
-  name: "VistaPrincipal",
+  name: "VistaPoliticasDelivery",
 };
 </script>
 

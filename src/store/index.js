@@ -3,11 +3,6 @@ import http from '@/plugins/axios';
 
 import user from "./user"
 import users from "./usuarios"
-//import otros from "./otros"
-//import alimentos from "./alimentos"
-//import consultas from "./consultas"
-//import plantillas from "./plantillas"
-//import planes from "./planes"
 
 export default createStore({
   state: {
@@ -35,7 +30,7 @@ export default createStore({
     dataBase: (state) => state.base,
     getServerError: (state) => state.serverError,
     rolAdministrador: () => "Administrador",
-    rolNutricionista: () => "Nutricionista",
+    rolEmpleado: () => "Empleado",
     rolPaciente: () => "Cliente",
   },
   mutations: {
@@ -86,10 +81,5 @@ export default createStore({
   modules: {
     user,
     users
-    //otros,
-    //alimentos,
-    //consultas,
-    //plantillas,
-   // planes
   }
 })

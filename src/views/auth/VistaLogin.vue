@@ -2,21 +2,21 @@
   <div class="login__wrapper">
     <div class="login__container">
       <div class="card__login">
+        <div class="column__images">
+          <img draggable="false" :src="formLogin.image" alt="" />
+        </div>
         <div class="column__form">
           <form @submit.prevent="signIn">
-            <img
-              :src="logo"
-              width="120"
-              alt=""
-            >
-            <h2>{{ formLogin.title }}</h2>
-            <p>{{ formLogin.subtitle }}</p>
+            <a href="/">
+              <img :src="logo" width="100" alt="" />
+            </a>
+            <div class="login-texto">
+              <h2>{{ formLogin.title }}</h2>
+              <p>{{ formLogin.subtitle }}</p>
+            </div>
+
             <v-row>
-              <v-col
-                cols="12"
-                lg="12"
-                sm="12"
-              >
+              <v-col cols="12" lg="12" sm="12">
                 <v-text-field
                   v-model="user.username"
                   class="input__search_doi"
@@ -31,11 +31,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                cols="12"
-                lg="12"
-                sm="12"
-              >
+              <v-col cols="12" lg="12" sm="12">
                 <v-text-field
                   v-model="user.password"
                   class="input__search_doi"
@@ -50,22 +46,18 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                cols="12"
-                lg="12"
-                sm="12"
-              >
-                <TextButton 
+              <v-col cols="12" lg="12" sm="12">
+                <TextButton
                   :label="formLogin.button.label"
                   type="submit"
-                  class="w-100 d-flex justify-content-center"
+                  class="w-100 d-flex justify-content-center rounded2"
                   :loading="loading"
                   :disabled="loading"
-                /><br><br>
-                <TextButton 
-                  :label="formLogin.button.label"
+                /><br />
+                <TextButton
+                  :label="formLogin.button2.label"
                   type="submit"
-                  class="w-100 d-flex justify-content-center"
+                  class="w-100 d-flex justify-content-center otro-color rounded2"
                   :loading="loading"
                   :disabled="loading"
                 />
@@ -80,13 +72,6 @@
             </v-row>
           </form>
         </div>
-        <div class="column__images">
-          <img
-            draggable="false"
-            :src="formLogin.image"
-            alt=""
-          >
-        </div>
       </div>
     </div>
   </div>
@@ -94,7 +79,7 @@
 
 <script>
 import CopyRight from "@/components/CopyRight.vue";
-import TextButton from "@/components/buttons/TextButton.vue"
+import TextButton from "@/components/buttons/TextButton.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -107,7 +92,7 @@ export default {
     const router = useRouter();
 
     const user = ref({ username: "", password: "" });
-    const loading = ref(false)
+    const loading = ref(false);
 
     const formLogin = computed(
       () => store.getters.dataBase?.forms?.login ?? {}
@@ -134,38 +119,47 @@ export default {
     };
 
     const signIn = async () => {
-      const validateUsername = validateMinMaxUsername(user.value.username)
-      const validatePassword = validateMinMaxPassword(user.value.password)
+      const validateUsername = validateMinMaxUsername(user.value.username);
+      const validatePassword = validateMinMaxPassword(user.value.password);
 
-      if(validateUsername !== true) { 
+      if (validateUsername !== true) {
         store.dispatch("activeSnackbar", {
           type: "warning",
           active: true,
           message: validateUsername,
-          position: "bottom-center"
-        })
-        return 
+          position: "bottom-center",
+        });
+        return;
       }
-      if(validatePassword !== true) {
+      if (validatePassword !== true) {
         store.dispatch("activeSnackbar", {
           type: "warning",
           active: true,
           message: validatePassword,
+          position: "bottom-center",
+        });
+        return;
+      }
+      if(!/.+@.+\..+/.test(user.value.username)) {
+        store.dispatch("activeSnackbar", {
+          type: "warning",
+          active: true,
+          message: "Escribe un correo válido con @ y dominio",
           position: "bottom-center"
         })
         return
       }
 
-      loading.value = true
+      loading.value = true;
 
       const response = await store.dispatch("login", {
         usuario: user.value.username,
-        contrasena: user.value.password
+        contrasena: user.value.password,
       });
 
-      loading.value = false
-      if(!response) return
-      
+      loading.value = false;
+      if (!response) return;
+
       router.push({ name: "Home" });
     };
 
@@ -184,6 +178,15 @@ export default {
 </script>
 
 <style lang="scss">
+.login-texto {
+  text-align: center;
+  h2 {
+  }
+  p {
+    font-weight: bold;
+  }
+}
+
 .login__wrapper {
   height: 100vh;
   background: var(--color-fondo-dark);
@@ -199,8 +202,14 @@ export default {
     margin-bottom: 18px;
   }
   .custom__button {
-    background: var(--color-primary-500);
+    background: #173083;
     color: var(--color-white);
+  }
+  .otro-color {
+    background: #fbb905;
+  }
+  .rounded2 {
+    border-radius: 30px !important;
   }
   .card__login {
     display: grid;

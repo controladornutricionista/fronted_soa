@@ -14,7 +14,7 @@ export default async function (to, from, next) {
 
     next({ name: "Home" })
 
-  } else if(to.name === "AuthLogin" && !isFullAuthenticated) {
+  } else if(to.name === "VistaLogin" && !isFullAuthenticated) {
     
     return next()
 

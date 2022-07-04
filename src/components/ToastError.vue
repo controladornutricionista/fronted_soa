@@ -12,13 +12,10 @@ const toast = useToast();
 const store = useStore();
 
 const serverError = computed(() => {
-
-  console.log(store.getters.getServerError);
   return store.getters.getServerError
 });
 
 watch(serverError, (val) => {
-  console.log(val);
   toast.add({
     severity: "warn",
     summary: `Error ${val.errorCode}:`,
