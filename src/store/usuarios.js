@@ -19,12 +19,20 @@ const getters = {
 };
 
 const actions = {
-  listarUsuarios: async ({ commit }) => {
+  listarEmpleados: async ({ commit }) => {
     const { data, status } = await http.get("/usuarios");
     if (status != 200) return;
     commit(
       "setUsers",
-      data.body.filter((user) => user?.rol?.nombre != "Empleado")
+      data.body.filter((user) => user?.rol?.nombre == "Empleado")
+    );
+  },
+  listarCliente: async ({ commit }) => {
+    const { data, status } = await http.get("/usuarios");
+    if (status != 200) return;
+    commit(
+      "setUsers",
+      data.body.filter((user) => user?.rol?.nombre == "Cliente")
     );
   },
   crearUsuario: async ({}, usuario) => {

@@ -5,19 +5,13 @@
       <AppBar />
       <div class="main__content">
         <router-view v-slot="{ Component, route }">
-          <transition
-            :name="route.meta.transition || 'fade'"
-            mode="out-in"
-          >
+          <transition :name="route.meta.transition || 'fade'" mode="out-in">
             <component :is="Component" />
           </transition>
         </router-view>
       </div>
     </main>
-    <div
-      class="overlay__menu"
-      @click="closeSidebar"
-    />
+    <div class="overlay__menu" @click="closeSidebar" />
     <LoaderPage />
   </div>
 </template>

@@ -2,7 +2,7 @@
   <form class="form__container" @submit.prevent="saveForm">
     <v-row>
       <v-col cols="12" class="pb-0" lg="12">
-        <h4>Datos de usuario</h4>
+        <h4>Datos del empleado</h4>
       </v-col>
       <v-col
         v-if="user.imagen"
@@ -139,16 +139,6 @@
       </v-col>
       <v-col cols="12" class="pb-1" lg="6" md="12">
         <span>
-          <label>Sexo</label>
-          <Dropdown
-            v-model="persona.sexo"
-            :disabled="disabled"
-            :options="sexos"
-          />
-        </span>
-      </v-col>
-      <v-col cols="12" class="pb-1" lg="6" md="12">
-        <span>
           <label for="date">Fecha Nacimiento</label>
           <InputText
             v-model="persona.fechaNacimiento"
@@ -272,12 +262,11 @@ const props = defineProps({
     type: Object,
     default: () => null,
   },
-  isNutricionista: Boolean
+  isEmpleado: Boolean
 });
 
 const loading = ref(false);
 const disabled = ref(props.readonly);
-const sexos = ["Hombre", "Mujer", "No especificar"];
 const user = ref(
   props.userEdited
     ? {
@@ -297,30 +286,22 @@ const user = ref(
       }
 );
 
-const persona = ref(
-  props.userEdited?.persona
-    ? { ...props.userEdited?.persona }
+const usuario = ref(
+  props.userEdited?.usuario
+    ? { ...props.userEdited?.usuario }
     : {
         nombres: "",
         apellidos: "",
         dni: "",
         celular: "",
-        telefono: "",
-        sexo: null,
-        pais: "Perú",
-        fechaNacimiento: "",
-        email: "",
-        enfermedades: [],
-        estatura: 0,
-        peso: 0
+        direccion: ""
       }
 );
 
 const baseURL = computed(() => store.getters.getBaseURL);
-const roles = computed(() => props.isNutricionista ? store.getters.getRoles.filter(rol => rol?.nombre === 'Cliente')  : store.getters.getRoles);
-const enfermedades = computed(() => store.getters.getEnfermedades);
+const roles = computed(() => props.isEmpleado ? store.getters.getRoles.filter(rol => rol?.nombre === 'Empleado')  : store.getters.getRoles);
 const rolAdministrador = computed(() => store.getters.rolAdministrador);
-const rolPaciente = computed(() => store.getters.rolPaciente);
+
 
 const getRoleName = () => {
   return roles.value.find(
@@ -385,10 +366,10 @@ const saveForm = async () => {
         person = {
           _id: persona.value?._id
         }
-        await store.dispatch("editarPersona", { ...persona.value });
+        await store.dispatch("editarEmpleado", { ...usuario.value });
       } else {
         // crear persona
-        person = await store.dispatch("crearPersona", { ...persona.value });
+        person = await store.dispatch("crearEmpleado", { ...usuario.value });
       }
     }
 

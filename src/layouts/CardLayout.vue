@@ -1,6 +1,7 @@
 <template>
   <v-card class="card__layout" outlined>
     <div
+    v-if="!nomostrarheaderanuncion"
       :class="`card__header_anuncio ${
         collapsible ? 'card__header_anuncio--hover' : ''
       }`"
@@ -11,6 +12,7 @@
       </slot>
     </div>
     <div
+    v-if="!nomostrarheaderbar"
       :class="`card__header_bar ${
         collapsible ? 'card__header_bar--hover' : ''
       }`"
@@ -30,6 +32,7 @@
     </div>
 
     <div
+      v-if="!nomostrarfooter"
       :class="`card__footer_bar ${
         collapsible ? 'card__footer_bar--hover' : ''
       }`"
@@ -55,6 +58,18 @@ const props = defineProps({
     default: "",
   },
   collapsible: {
+    type: Boolean,
+    default: false,
+  },
+  nomostrarfooter: {
+    type: Boolean,
+    default: false,
+  },
+  nomostrarheaderanuncion: {
+    type: Boolean,
+    default: false,
+  },
+  nomostrarheaderbar: {
     type: Boolean,
     default: false,
   },
@@ -105,15 +120,15 @@ const toggleCollapse = () => {
       background: var(--color-fondo-tab) !important;
     }
   }
-  .card__footer_bar{
+  .card__footer_bar {
     margin-top: 0px;
     height: 500px;
     padding: 12px var(--padding-x);
     color: var(--color-white);
     background: #173083;
-    display: inline-flex; 
+    display: inline-flex;
     display: flex;
-   
+
     flex-direction: column;
     padding-top: 20px;
   }
@@ -123,7 +138,7 @@ const toggleCollapse = () => {
     background: rgba(0, 0, 0);
     display: inline-flex;
     display: flex;
-   
+
     gap: 50px;
     justify-content: center;
   }
