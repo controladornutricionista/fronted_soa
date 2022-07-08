@@ -31,7 +31,7 @@ export default createStore({
     getServerError: (state) => state.serverError,
     rolAdministrador: () => "Administrador",
     rolEmpleado: () => "Empleado",
-    rolPaciente: () => "Cliente",
+    rolCliente: () => "Cliente",
   },
   mutations: {
     setActiveSidebar(state, sidebarStatus) {

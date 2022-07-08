@@ -62,6 +62,7 @@ const router = createRouter({
           name: "VistaEmpleados",
           component: () => import("@/views/app/VistaEmpleados"),
         },
+      
       ],
     },
   ],

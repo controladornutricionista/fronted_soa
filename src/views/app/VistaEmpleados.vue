@@ -1,5 +1,11 @@
 <template>
-  <CardLayout title="Empleados" :icon="currentRoute.icon" :nomostrarfooter="true" :nomostrarheaderanuncion="true" v-bind:nomostrarheaderbar="true">
+  <CardLayout
+    title="Empleados"
+    :icon="currentRoute.icon"
+    :nomostrarfooter="true"
+    :nomostrarheaderanuncion="true"
+    v-bind:nomostrarheaderbar="true"
+  >
     <template #content>
       <div class="controls__table">
         <span />
@@ -171,7 +177,6 @@ const openRemove = (data) => {
 onMounted(async () => {
   await store.dispatch("listarEmpleados");
   await store.dispatch("listarRoles");
-
 });
 </script>
 
