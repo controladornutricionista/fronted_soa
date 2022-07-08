@@ -34,22 +34,44 @@
         <div class="main-contenido">
           <div class="main-imagen1">
             <div class="imagen1">
+              <div>
               <img
                 :src="require('@/assets/Hamburguesa-Suprema.jpg')"
                 class="bg-imgmenu"
               />
+              </div>
+              <div class="tiposH">
+              <imput type="radio" id="hambuguesasuprema" name="hambuguesasuprema" value="suprema"></imput> 
+              <label for="hambuguesasuprema"> Hamburguesa Suprema </label><br>
+              <imput type="checkbox" id="hambuguesamcronal" name="hambuguesamcronal" value="mcronal"></imput> 
+              <label for="hambuguesamcronal"> Hamburguesa MCRonal </label><br>
+              <imput type="checkbox" id="hambuguesakid" name="hambuguesakid" value="kid"></imput> 
+              <label for="hambuguesakid"> Hamburguesa Kid </label><br>
+              </div>
             </div>
             <div class="imagen1">
               <img
                 :src="require('@/assets/Salchipapa-mortal.jpg')"
                 class="bg-imgmenu"
               />
+              <div class="tiposS">
+              <div>Salchipapa Frank</div>
+              <div>Salchipapa Mortal</div>
+              <div>Salchipapa Tradicional</div>
+            
+            </div>
             </div>
             <div class="imagen1">
               <img
                 :src="require('@/assets/Broaster-Pierna.jpg')"
                 class="bg-imgmenu"
               />
+              <div class="tiposB">
+              <div>Broaster Alita</div>
+              <div>Broaster Pecho</div>
+              <div>Broaster Pierna</div>
+             
+            </div>
             </div>
           </div>
         </div>
@@ -80,6 +102,7 @@ export default {
     .imagen1 {
         display: flex;
       width: 100%;
+      flex-direction: column;
       justify-content: center;
   align-items: center;
       .bg-imgmenu {
@@ -262,4 +285,5 @@ h1 {
 .header-contenido {
   padding-left: 50px;
 }
+
 </style>
