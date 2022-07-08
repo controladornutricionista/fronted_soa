@@ -56,13 +56,27 @@ const router = createRouter({
           path: "/Login",
           name: "Home",
           component: () => import("@/views/app/Home"),
+          meta: { transition: "fade" },
         },
         {
           path: "/VistaEmpleados",
           name: "VistaEmpleados",
           component: () => import("@/views/app/VistaEmpleados"),
+          meta: { transition: "fade" },
         },
-      
+        {
+          path: "/VistaNuevoPedido",
+          name: "VistaNuevoPedido",
+          component: () => import("@/views/app/VistaNuevoPedido"),
+          meta: { transition: "fade" },
+        },
+        {
+          path: "/VistaMisPedidos",
+          name: "VistaMisPedidos",
+          component: () => import("@/views/app/VistaMisPedidos"),
+          meta: { transition: "fade" },
+        },
+       
       ],
     },
   ],
