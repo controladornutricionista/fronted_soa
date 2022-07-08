@@ -49,7 +49,7 @@
           id="activeUser"
           v-model="user.activo"
           :binary="true"
-          value="¿Usuario habilitado?"
+          value="¿Usuario habilitado.?"
           :disabled="disabled"
         />
       </v-col>
