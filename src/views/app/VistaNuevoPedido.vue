@@ -34,19 +34,42 @@
         <div class="main-contenido">
           <div class="main-imagen1">
             <div class="imagen1">
-              <div>
               <img
                 :src="require('@/assets/Hamburguesa-Suprema.jpg')"
                 class="bg-imgmenu"
               />
-              </div>
               <div class="tiposH">
-              <imput type="radio" id="hambuguesasuprema" name="hambuguesasuprema" value="suprema"></imput> 
-              <label for="hambuguesasuprema"> Hamburguesa Suprema </label><br>
-              <imput type="checkbox" id="hambuguesamcronal" name="hambuguesamcronal" value="mcronal"></imput> 
-              <label for="hambuguesamcronal"> Hamburguesa MCRonal </label><br>
-              <imput type="checkbox" id="hambuguesakid" name="hambuguesakid" value="kid"></imput> 
-              <label for="hambuguesakid"> Hamburguesa Kid </label><br>
+                <div>
+                  <label for="activeAlimento1">Hamburguesa Suprema </label>
+                  <Checkbox
+                    id="activeAlimento1"
+                    :binary="true"
+                    value="Hamburguesa Suprema"
+                    :disabled="disabled"
+                  />
+                </div>
+                <div>
+                  <label for="activeAlimento2" class="mr-2"
+                    >Hamburguesa MCRonal</label
+                  >
+                  <Checkbox
+                    id="activeAlimento2"
+                    :binary="true"
+                    value="Hamburguesa MCRonal"
+                    :disabled="disabled"
+                  />
+                </div>
+                <div>
+                  <label for="activeAlimento3" class="mr-2">
+                    Hamburguesa Kid
+                  </label>
+                  <Checkbox
+                    id="activeAlimento3"
+                    :binary="true"
+                    value="Hamburguesa Kid"
+                    :disabled="disabled"
+                  />
+                </div>
               </div>
             </div>
             <div class="imagen1">
@@ -54,24 +77,78 @@
                 :src="require('@/assets/Salchipapa-mortal.jpg')"
                 class="bg-imgmenu"
               />
-              <div class="tiposS">
-              <div>Salchipapa Frank</div>
-              <div>Salchipapa Mortal</div>
-              <div>Salchipapa Tradicional</div>
-            
-            </div>
+              <div class="tiposH">
+                <div>
+                  <label for="activeAlimento1">Salchipapa Frank </label>
+                  <Checkbox
+                    id="activeAlimento4"
+                    :binary="true"
+                    value="Salchipapa Frank"
+                    :disabled="disabled"
+                  />
+                </div>
+                <div>
+                  <label for="activeAlimento2" class="mr-2"
+                    >Salchipapa Mortal</label
+                  >
+                  <Checkbox
+                    id="activeAlimento5"
+                    :binary="true"
+                    value="Salchipapa Mortal"
+                    :disabled="disabled"
+                  />
+                </div>
+                <div>
+                  <label for="activeAlimento3" class="mr-2">
+                    Salchipapa Tradicional
+                  </label>
+                  <Checkbox
+                    id="activeAlimento6"
+                    :binary="true"
+                    value="Salchipapa Tradicional"
+                    :disabled="disabled"
+                  />
+                </div>
+              </div>
             </div>
             <div class="imagen1">
               <img
                 :src="require('@/assets/Broaster-Pierna.jpg')"
                 class="bg-imgmenu"
               />
-              <div class="tiposB">
-              <div>Broaster Alita</div>
-              <div>Broaster Pecho</div>
-              <div>Broaster Pierna</div>
-             
-            </div>
+              <div class="tiposH">
+                <div>
+                  <label for="activeAlimento1">Broaster Alita </label>
+                  <Checkbox
+                    id="activeAlimento7"
+                    :binary="true"
+                    value="Broaster Alita"
+                    :disabled="disabled"
+                  />
+                </div>
+                <div>
+                  <label for="activeAlimento2" class="mr-2"
+                    >Broaster Pecho</label
+                  >
+                  <Checkbox
+                    id="activeAlimento8"
+                    :binary="true"
+                    value="Broaster Pecho"
+                    :disabled="disabled"
+                  />
+                </div>
+                <div>
+                  <label for="activeAlimento3" class="mr-2">
+                    Broaster Pierna
+                  </label>
+                  <Checkbox
+                    id="activeAlimento9"
+                    :binary="true"
+                    value="Broaster Pierna"
+                    :disabled="disabled"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -82,6 +159,7 @@
 
 <script setup>
 import CardLayout from "@/layouts/CardLayout.vue";
+import Checkbox from "primevue/checkbox";
 </script>
 
 <script>
@@ -99,12 +177,19 @@ export default {
   padding-bottom: 0px;
   .main-imagen1 {
     display: flex;
+    padding-top: 50px;
     .imagen1 {
-        display: flex;
+      display: flex;
       width: 100%;
       flex-direction: column;
       justify-content: center;
-  align-items: center;
+      align-items: center;
+      .tiposH {
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
       .bg-imgmenu {
         width: 80%;
         height: calc(100vh - 500px);
@@ -285,5 +370,4 @@ h1 {
 .header-contenido {
   padding-left: 50px;
 }
-
 </style>
