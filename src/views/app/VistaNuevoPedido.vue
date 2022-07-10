@@ -1,5 +1,5 @@
 <template>
-  <CardLayout :title="fullnameUser" :icon="icon" :nomostrarfooter="true">
+  <CardLayout :nomostrarfooter="true">
     <template #header1>
       <div class="cont1">
         <h1 contenido1>{{ "Atención" }}</h1>
@@ -39,16 +39,19 @@
                 class="bg-imgmenu"
               />
               <div class="tiposH">
-                <div>
-                  <label for="activeAlimento1">Hamburguesa Suprema </label>
+                <div class="menupromocional1">
+                  <label for="activeAlimento1" class="mr-2"
+                    >Hamburguesa Suprema
+                  </label>
                   <Checkbox
                     id="activeAlimento1"
                     :binary="true"
                     value="Hamburguesa Suprema"
-                    :disabled="disabled"
+                    v-model="checkbox1"
+                    @change="onCheckChange('1')"
                   />
                 </div>
-                <div>
+                <div class="menupromocional1">
                   <label for="activeAlimento2" class="mr-2"
                     >Hamburguesa MCRonal</label
                   >
@@ -56,10 +59,9 @@
                     id="activeAlimento2"
                     :binary="true"
                     value="Hamburguesa MCRonal"
-                    :disabled="disabled"
                   />
                 </div>
-                <div>
+                <div class="menupromocional1">
                   <label for="activeAlimento3" class="mr-2">
                     Hamburguesa Kid
                   </label>
@@ -67,7 +69,7 @@
                     id="activeAlimento3"
                     :binary="true"
                     value="Hamburguesa Kid"
-                    :disabled="disabled"
+               
                   />
                 </div>
               </div>
@@ -78,35 +80,37 @@
                 class="bg-imgmenu"
               />
               <div class="tiposH">
-                <div>
-                  <label for="activeAlimento1">Salchipapa Frank </label>
+                <div class="menupromocional1">
+                  <label for="activeAlimento4" class="mr-2"
+                    >Salchipapa Frank
+                  </label>
                   <Checkbox
                     id="activeAlimento4"
                     :binary="true"
                     value="Salchipapa Frank"
-                    :disabled="disabled"
+                  
                   />
                 </div>
-                <div>
-                  <label for="activeAlimento2" class="mr-2"
+                <div class="menupromocional1">
+                  <label for="activeAlimento5" class="mr-2"
                     >Salchipapa Mortal</label
                   >
                   <Checkbox
                     id="activeAlimento5"
                     :binary="true"
                     value="Salchipapa Mortal"
-                    :disabled="disabled"
+                 
                   />
                 </div>
-                <div>
-                  <label for="activeAlimento3" class="mr-2">
+                <div class="menupromocional1">
+                  <label for="activeAlimento6" class="mr-2">
                     Salchipapa Tradicional
                   </label>
                   <Checkbox
                     id="activeAlimento6"
                     :binary="true"
                     value="Salchipapa Tradicional"
-                    :disabled="disabled"
+                
                   />
                 </div>
               </div>
@@ -117,35 +121,37 @@
                 class="bg-imgmenu"
               />
               <div class="tiposH">
-                <div>
-                  <label for="activeAlimento1">Broaster Alita </label>
+                <div class="menupromocional1">
+                  <label for="activeAlimento7" class="mr-2"
+                    >Broaster Alita
+                  </label>
                   <Checkbox
                     id="activeAlimento7"
                     :binary="true"
                     value="Broaster Alita"
-                    :disabled="disabled"
+              
                   />
                 </div>
-                <div>
-                  <label for="activeAlimento2" class="mr-2"
+                <div class="menupromocional1">
+                  <label for="activeAlimento8" class="mr-2"
                     >Broaster Pecho</label
                   >
                   <Checkbox
                     id="activeAlimento8"
                     :binary="true"
                     value="Broaster Pecho"
-                    :disabled="disabled"
+              
                   />
                 </div>
-                <div>
-                  <label for="activeAlimento3" class="mr-2">
+                <div class="menupromocional1">
+                  <label for="activeAlimento9" class="mr-2">
                     Broaster Pierna
                   </label>
                   <Checkbox
                     id="activeAlimento9"
                     :binary="true"
                     value="Broaster Pierna"
-                    :disabled="disabled"
+              
                   />
                 </div>
               </div>
@@ -153,6 +159,18 @@
           </div>
         </div>
       </div>
+    <SidebarMenu ref="menu">
+      <template #content>
+        <FormPedidoVue>
+
+        </FormPedidoVue> 
+      </template>
+    </SidebarMenu>
+
+
+
+
+
     </template>
   </CardLayout>
 </template>
@@ -160,6 +178,19 @@
 <script setup>
 import CardLayout from "@/layouts/CardLayout.vue";
 import Checkbox from "primevue/checkbox";
+import { ref } from "vue";
+import SidebarMenu from "@/components/SidebarMenu.vue";
+import FormPedidoVue from "@/components/forms/FormPedido.vue";
+
+const checkbox1 = ref(false)
+
+const displayBasic = ref(false)
+const menu=ref()
+const onCheckChange = (id) => {
+  console.log(id)
+  menu.value.open()
+}
+
 </script>
 
 <script>
@@ -189,6 +220,11 @@ export default {
         flex-direction: column;
         padding-top: 30px;
         padding-bottom: 30px;
+        .menupromocional1 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
       }
       .bg-imgmenu {
         width: 80%;
