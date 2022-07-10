@@ -3,6 +3,7 @@ import http from '@/plugins/axios';
 
 import user from "./user"
 import users from "./usuarios"
+import pedidos from "./pedidos"
 
 export default createStore({
   state: {
@@ -80,6 +81,7 @@ export default createStore({
   },
   modules: {
     user,
-    users
+    users,
+    pedidos
   }
 })

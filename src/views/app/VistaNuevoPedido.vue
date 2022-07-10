@@ -45,10 +45,9 @@
                   </label>
                   <Checkbox
                     id="activeAlimento1"
-                    :binary="true"
-                    value="Hamburguesa Suprema"
-                    v-model="checkbox1"
-                    @change="onCheckChange('1')"
+                    value="1"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('1'), '1')"
                   />
                 </div>
                 <div class="menupromocional1">
@@ -57,8 +56,9 @@
                   >
                   <Checkbox
                     id="activeAlimento2"
-                    :binary="true"
-                    value="Hamburguesa MCRonal"
+                    value="3"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('3'), '3')"
                   />
                 </div>
                 <div class="menupromocional1">
@@ -67,9 +67,9 @@
                   </label>
                   <Checkbox
                     id="activeAlimento3"
-                    :binary="true"
-                    value="Hamburguesa Kid"
-               
+                    value="2"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('2'), '2')"
                   />
                 </div>
               </div>
@@ -86,9 +86,9 @@
                   </label>
                   <Checkbox
                     id="activeAlimento4"
-                    :binary="true"
-                    value="Salchipapa Frank"
-                  
+                    value="5"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('5'), '5')"
                   />
                 </div>
                 <div class="menupromocional1">
@@ -99,7 +99,6 @@
                     id="activeAlimento5"
                     :binary="true"
                     value="Salchipapa Mortal"
-                 
                   />
                 </div>
                 <div class="menupromocional1">
@@ -110,7 +109,6 @@
                     id="activeAlimento6"
                     :binary="true"
                     value="Salchipapa Tradicional"
-                
                   />
                 </div>
               </div>
@@ -129,7 +127,6 @@
                     id="activeAlimento7"
                     :binary="true"
                     value="Broaster Alita"
-              
                   />
                 </div>
                 <div class="menupromocional1">
@@ -140,7 +137,6 @@
                     id="activeAlimento8"
                     :binary="true"
                     value="Broaster Pecho"
-              
                   />
                 </div>
                 <div class="menupromocional1">
@@ -151,7 +147,6 @@
                     id="activeAlimento9"
                     :binary="true"
                     value="Broaster Pierna"
-              
                   />
                 </div>
               </div>
@@ -159,18 +154,11 @@
           </div>
         </div>
       </div>
-    <SidebarMenu ref="menu">
-      <template #content>
-        <FormPedidoVue>
-
-        </FormPedidoVue> 
-      </template>
-    </SidebarMenu>
-
-
-
-
-
+      <SidebarMenu ref="menu">
+        <template #content>
+          <FormPedidoVue :menu="menuSeleceted" @closeForm="closeForm"> </FormPedidoVue>
+        </template>
+      </SidebarMenu>
     </template>
   </CardLayout>
 </template>
@@ -178,19 +166,34 @@
 <script setup>
 import CardLayout from "@/layouts/CardLayout.vue";
 import Checkbox from "primevue/checkbox";
-import { ref } from "vue";
 import SidebarMenu from "@/components/SidebarMenu.vue";
 import FormPedidoVue from "@/components/forms/FormPedido.vue";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
 
-const checkbox1 = ref(false)
+const store = useStore();
+const checkboxes = ref([]);
 
-const displayBasic = ref(false)
-const menu=ref()
-const onCheckChange = (id) => {
-  console.log(id)
-  menu.value.open()
+const menu = ref();
+const menuList = computed(() => store.getters.getMenus);
+const menuSeleceted = ref();
+
+
+const closeForm = () => {
+  menu.value.close();
 }
 
+const onCheckChange = (value, id) => {
+  console.log("cambió", value, id);
+  if (value) {
+    checkboxes.value = [];
+    checkboxes.value.push(id);
+    const menuFounded = menuList.value.find((menu) => menu.id == id);
+    menuSeleceted.value = menuFounded;
+    console.log(menuFounded);
+    menu.value.open();
+  }
+};
 </script>
 
 <script>

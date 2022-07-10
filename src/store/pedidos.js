@@ -2,18 +2,27 @@ import http from "@/plugins/axios";
 
 const state = {
   pedidos: [],
+  menus: []
 };
 
 const getters = {
   getPedidos: (state) => state.pedidos,
+  getMenus: state => state.menus
 };
 
 const mutations = {
-  getPedidos: (state, pedidos) => (state.pedidos = pedidos),
+  setPedidos: (state, pedidos) => (state.pedidos = pedidos),
   addPedido: (state, pedido) => state.pedidos.push(pedido),
+  setMenus: (state, menus) => state.menus = menus
 };
 
 const actions = {
+  listarMenus: async({ commit }) => {
+    const { data, status } = await http.get("/menus");
+    if (status != 200 && status != 201) return false;
+    commit("setMenus", data.body);
+    return true;
+  },
   listarPedidos: async ({ commit,state }) => {
     const { data, status } = await http.get("/pedidos");
     if (status != 200 && status != 201) return false;
