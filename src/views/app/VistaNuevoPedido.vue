@@ -51,25 +51,25 @@
                   />
                 </div>
                 <div class="menupromocional1">
-                  <label for="activeAlimento2" class="mr-2"
-                    >Hamburguesa MCRonal</label
-                  >
-                  <Checkbox
-                    id="activeAlimento2"
-                    value="3"
-                    v-model="checkboxes"
-                    @change="onCheckChange(checkboxes.includes('3'), '3')"
-                  />
-                </div>
-                <div class="menupromocional1">
-                  <label for="activeAlimento3" class="mr-2">
+                  <label for="activeAlimento2" class="mr-2">
                     Hamburguesa Kid
                   </label>
                   <Checkbox
-                    id="activeAlimento3"
+                    id="activeAlimento2"
                     value="2"
                     v-model="checkboxes"
                     @change="onCheckChange(checkboxes.includes('2'), '2')"
+                  />
+                </div>
+                <div class="menupromocional1">
+                  <label for="activeAlimento3" class="mr-2"
+                    >Hamburguesa MCRonal</label
+                  >
+                  <Checkbox
+                    id="activeAlimento3"
+                    value="3"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('3'), '3')"
                   />
                 </div>
               </div>
@@ -97,8 +97,9 @@
                   >
                   <Checkbox
                     id="activeAlimento5"
-                    :binary="true"
-                    value="Salchipapa Mortal"
+                     value="6"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('6'), '6')"
                   />
                 </div>
                 <div class="menupromocional1">
@@ -107,12 +108,15 @@
                   </label>
                   <Checkbox
                     id="activeAlimento6"
-                    :binary="true"
-                    value="Salchipapa Tradicional"
+                     value="4"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('4'), '4')"
                   />
                 </div>
               </div>
             </div>
+
+
             <div class="imagen1">
               <img
                 :src="require('@/assets/Broaster-Pierna.jpg')"
@@ -125,8 +129,9 @@
                   </label>
                   <Checkbox
                     id="activeAlimento7"
-                    :binary="true"
-                    value="Broaster Alita"
+                     value="9"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('9'), '9')"
                   />
                 </div>
                 <div class="menupromocional1">
@@ -135,8 +140,9 @@
                   >
                   <Checkbox
                     id="activeAlimento8"
-                    :binary="true"
-                    value="Broaster Pecho"
+                    value="7"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('7'), '7')"
                   />
                 </div>
                 <div class="menupromocional1">
@@ -145,8 +151,9 @@
                   </label>
                   <Checkbox
                     id="activeAlimento9"
-                    :binary="true"
-                    value="Broaster Pierna"
+                    value="8"
+                    v-model="checkboxes"
+                    @change="onCheckChange(checkboxes.includes('8'), '8')"
                   />
                 </div>
               </div>
@@ -156,7 +163,8 @@
       </div>
       <SidebarMenu ref="menu">
         <template #content>
-          <FormPedidoVue :menu="menuSeleceted" @closeForm="closeForm"> </FormPedidoVue>
+          <FormPedidoVue :menu="menuSeleceted" @closeForm="closeForm">
+          </FormPedidoVue>
         </template>
       </SidebarMenu>
     </template>
@@ -178,10 +186,9 @@ const menu = ref();
 const menuList = computed(() => store.getters.getMenus);
 const menuSeleceted = ref();
 
-
 const closeForm = () => {
   menu.value.close();
-}
+};
 
 const onCheckChange = (value, id) => {
   console.log("cambió", value, id);

@@ -1,106 +1,91 @@
 <template>
   <CardLayout
-    title="Pedidos"
+    title="Pedidos Realizados"
     :icon="currentRoute.icon"
     :nomostrarfooter="true"
     :nomostrarheaderanuncion="true"
-    v-bind:nomostrarheaderbar="true"
+    :nomostrarheaderbar="true"
   >
     <template #content>
-      <div class="controls__table">
-        <span />
-        <Button
-          icon="pi pi-plus"
-          class="p-button-rounded p-button-secondary"
-          :style="{ background: 'var(--color-primary-500)' }"
-          @click="openForm"
-        />
-      </div>
-      <DataTable :value="Empleados" responsive-layout="scroll">
+      
+      <DataTable :value="Pedidos" responsive-layout="scroll">
         <Column field="orden" header="#">
           <template #body="slotProps">
             <span>{{ slotProps.data?.orden }}</span>
           </template>
         </Column>
-        <Column field="nombres" header="Numero de Pedido">
+        <Column field="numeroPedido" header="Numero de Pedido">
           <template #body="slotProps">
             <span>
-              {{ slotProps.data?.nombres }}
-              {{ slotProps.data?.apellidos }}
+              {{ slotProps.data?._id }}
             </span>
           </template>
         </Column>
-        <Column field="dniempleado" header="Usuario">
+        <Column field="Usuario" header="Usuario">
           <template #body="slotProps">
             <span>
-              {{ slotProps.data?.dni }}
+              {{ slotProps.data?.usuario?.nombres}}
+              {{ slotProps.data?.usuario?.apellidos}}
             </span>
           </template>
         </Column>
-        <Column field="celularempleado" header="Producto">
+        <Column field="Producto" header="Producto">
           <template #body="slotProps">
             <span>
-              {{ slotProps.data?.celular }}
+              {{ slotProps.data?.producto?.name }}
             </span>
           </template>
         </Column>
-          <Column field="celularempleado" header="Ensalada">
+        <Column field="PrecioFinal" header="PrecioFinal">
           <template #body="slotProps">
             <span>
-              {{ slotProps.data?.celular }}
+              S/.{{ slotProps.data?.producto?.precioFinal }}
             </span>
           </template>
         </Column>
-        <Column field="rol" header="Estado">
+        <Column field="Estado" header="Estado">
           <template #body="slotProps">
             <ChipText
-              :text="slotProps.data?.rol?.nombre"
-              :color="'black'"
-              :background="slotProps.data?.rol?.color"
-            />
-          </template>
-        </Column>
-        <Column
-          v-for="(item, idx) in headers"
-          :key="idx + 1000"
-          :field="item.value"
-          :header="item.text"
-        />
-
-        <Column field="activo" header="Unidad">
-          <template #body="slotProps">
-            <ChipText
-              :text="slotProps.data?.activo ? 'Habilitado' : 'Inhabilitado'"
+              :text="slotProps.data?.estado ? 'Pendiente' : 'Realizado'"
               :color="
-                slotProps.data?.activo
+                slotProps.data?.estado
                   ? 'var(--color-primary-500)'
                   : 'var(--color-danger-500)'
               "
               :background="
-                slotProps.data?.activo
+                slotProps.data?.estado
                   ? 'var(--color-primary-100)'
                   : 'var(--color-danger-100)'
               "
             />
           </template>
         </Column>
-        <Column field="fechaCreacion" header="Fecha creación">
+        <Column field="fechaCreacion" header="Fecha de pedido">
           <template #body="slotProps">
-            <span>{{ momentDate(slotProps?.data?.fechaCreacion) }}</span>
+            <span>{{ formatPEDate(slotProps?.data?.fechaPedido) }}</span>
           </template>
         </Column>
-         <Column field="fechaCreacion" header="Comentarios">
+        <Column field="horaPedido" header="Hora de pedido">
           <template #body="slotProps">
-            <span>{{ momentDate(slotProps?.data?.fechaCreacion) }}</span>
+            <span>{{ (slotProps?.data?.horaInicio) }}</span>
           </template>
+        </Column>
+         <Column field="actions" header="">
+          <template #item_pedidosCliente="{ item }">
+              <div class="d-flex align-items-center">
+                <span
+                  >{{ item?.pedidosCliente?.length ?? 0 }} Pedido Registrado</span
+                >
+                <Button
+                  icon="pi pi-eye"
+                  class="p-button-rounded p-button-text ml-2"
+                  @click="openFormPedido(item)"
+                />
+              </div>
+            </template>
         </Column>
         <Column field="actions" header="">
           <template #body="slotProps">
-            <Button
-              icon="pi pi-user-edit"
-              class="p-button-rounded p-button-text"
-              @click="openFormEdit(slotProps?.data)"
-            />
             <Button
               icon="pi pi-trash"
               class="p-button-rounded p-button-text"
@@ -110,13 +95,18 @@
           </template>
         </Column>
       </DataTable>
-      <SidebarMenu ref="sidebar" :title="titleSidebar">
+      <SidebarMenu>
         <template #content>
           <FormUser
             @closeForm="closeForm"
-            @fetchUsers="$store.dispatch('listarEmpleados')"
-            :userEdited="editedUser"
+            @fetchUsers="$store.dispatch('listarPedidos')"
           />
+        </template>
+      </SidebarMenu>
+
+      <SidebarMenu ref="sidebarPedido" title="Detalles del pedido">
+        <template #content>
+          <FormPedido :pedido="Pedidos" no-form />
         </template>
       </SidebarMenu>
     </template>
@@ -128,58 +118,53 @@ import CardLayout from "@/layouts/CardLayout.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
+import FormPedido from "@/components/forms/FormPedido.vue";
 import SidebarMenu from "@/components/SidebarMenu.vue";
 import FormUser from "@/components/forms/FormUser.vue";
 import ChipText from "@/components/chips/ChipText.vue";
 import { useStore } from "vuex";
 import { computed, onMounted, ref } from "vue";
 import { loadImage } from "@/libs/loadImage";
-import { momentDate } from "@/libs/dateFormat";
+import { momentDate,formatPEDate } from "@/libs/dateFormat";
 import { useConfirm } from "primevue/useconfirm";
 import { useToast } from "primevue/usetoast";
+
 
 const store = useStore();
 const toast = useToast();
 const confirm = useConfirm();
 
-const sidebar = ref();
-
-const editedUser = ref(null);
-
-const titleSidebar = computed(() =>
-  editedUser.value ? "Editar Empleado" : "Crear Empleado"
-);
 const currentRoute = computed(() => store.getters.getCurrentRouteActive);
-const Empleados = computed(() => store.getters.getUsuarios);
-const headers = [{ text: "Empleado", value: "usuario" }];
+const Pedidos = computed(() => store.getters.getPedidos);
 
-const openForm = () => {
-  sidebar.value.open();
+const openFormPedido = (item) => {
+  consulta.value = { ...item };
+  sidebarConsulta.value.open();
 };
 
-const closeForm = () => {
-  sidebar.value.close();
-  editedUser.value = null;
-};
 
-const openFormEdit = (data) => {
-  editedUser.value = { ...data };
-  openForm();
-};
+const formatDate = (date) => {
+    console.log(date);
+    if(!date) return ""
+    return new Intl.DateTimeFormat('es-PE').format(date)
+    
+}
+
+
 
 const openRemove = (data) => {
   confirm.require({
-    message: "¿Estás seguro que deseas eliminar a este usuario?",
+    message: "¿Estás seguro que deseas eliminar a este pedido?",
     header: "Confirmación",
     icon: "pi pi-exclamation-triangle",
     accept: async () => {
-      const res = await store.dispatch("eliminarUsuario", data._id);
-      await store.dispatch("listarEmpleados");
+      const res = await store.dispatch("eliminarPedidos", data._id);
+      await store.dispatch("listarPedidos");
       res &&
         toast.add({
           severity: "info",
           summary: "Muy bien!",
-          detail: "El usuario se ha removido!",
+          detail: "El pedido se ha removido!",
           life: 3000,
         });
     },
@@ -187,14 +172,13 @@ const openRemove = (data) => {
 };
 
 onMounted(async () => {
-  await store.dispatch("listarEmpleados");
-  await store.dispatch("listarRoles");
+  await store.dispatch("listarPedidos");
 });
 </script>
 
 <script>
 export default {
-  name: "UsuariosPage",
+  name: "MisPedidosPage",
 };
 </script>
 

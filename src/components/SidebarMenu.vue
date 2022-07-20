@@ -31,7 +31,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: "Título",
+    default: "CoCo'sBURGER",
   },
   zIndex: {
     type: Number,

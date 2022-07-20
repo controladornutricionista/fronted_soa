@@ -4,7 +4,8 @@ const timezone = process.env.VUE_APP_TIMEZONE
 const dtf = new Intl.DateTimeFormat(zone)
 
 export const formatPEDate = (date) => {
-  return dtf.format(date)
+  if(!date) return ""
+  return dtf.format(new Date(date))
 };
 
 export const momentDate = (formatStr) => {
