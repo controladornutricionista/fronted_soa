@@ -2,7 +2,9 @@
   <div class="w-96 mx-auto border border-gray-400 rounded-lg form__payment">
     <div class="w-full h-auto p-4 flex items-center border-b border-gray-400">
       <h2 class="w-full">Tarjeta de Débito</h2>
-      <a href="#" class="w-full text-right text-sm font-semibold text-indigo-700"
+      <a
+        href="#"
+        class="w-full text-right text-sm font-semibold text-indigo-700"
         >Otros medios de pago</a
       >
     </div>
@@ -84,9 +86,7 @@
           :disabled="loading"
           class="h-16 w-full rounded-sm bg-indigo-600 tracking-wide font-semibold text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-600"
         >
-          <span v-if="!loading">
-            S/ {{ total }}.00 PAGAR
-          </span>
+          <span v-if="!loading"> S/ {{ total }}.00 PAGAR </span>
           <span v-else>Pagando...</span>
         </button>
       </form>
@@ -95,26 +95,26 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref } from "vue";
 
-const emit = defineEmits(["paymentSuccess"])
+const emit = defineEmits(["paymentSuccess"]);
 defineProps({
   total: {
     type: Number,
-    default: 1
-  }
-})
+    default: 1,
+  },
+});
 
-const loading = ref(false)
-const creditNumber = ref("")
+const loading = ref(false);
+const creditNumber = ref("");
 
 const pagar = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    emit('paymentSuccess', creditNumber.value)
+    loading.value = false;
+    emit("paymentSuccess", creditNumber.value);
   }, 2500);
-}
+};
 </script>
 
 <style lang="scss">

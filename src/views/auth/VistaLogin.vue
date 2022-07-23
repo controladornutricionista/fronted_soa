@@ -58,8 +58,7 @@
                   :label="formLogin.button2.label"
                   type="submit"
                   class="w-100 d-flex justify-content-center otro-color rounded2"
-                  :loading="loading"
-                  :disabled="loading"
+                  @click="openForm"
                 />
               </v-col>
             </v-row>
@@ -78,12 +77,21 @@
 </template>
 
 <script>
+import CardLayout from "@/layouts/CardLayout.vue";
 import CopyRight from "@/components/CopyRight.vue";
 import TextButton from "@/components/buttons/TextButton.vue";
+import SidebarMenu from "@/components/SidebarMenu.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import Button from "primevue/button";
+import FormUser from "@/components/forms/FormUser.vue";
+import { momentDate } from "@/libs/dateFormat";
+import { useConfirm } from "primevue/useconfirm";
 
+const openForm = () => {
+  sidebar.value.open();
+};
 export default {
   name: "LoginPage",
   components: { CopyRight, TextButton },
@@ -140,14 +148,14 @@ export default {
         });
         return;
       }
-      if(!/.+@.+\..+/.test(user.value.username)) {
+      if (!/.+@.+\..+/.test(user.value.username)) {
         store.dispatch("activeSnackbar", {
           type: "warning",
           active: true,
           message: "Escribe un correo válido con @ y dominio",
-          position: "bottom-center"
-        })
-        return
+          position: "bottom-center",
+        });
+        return;
       }
 
       loading.value = true;

@@ -76,6 +76,12 @@ const router = createRouter({
           component: () => import("@/views/app/VistaMisPedidos"),
           meta: { transition: "fade" },
         },
+        {
+          path: "/VistaPedidosPendientes",
+          name: "VistaPedidosPendientes",
+          component: () => import("@/views/app/VistaMisPedidos"),
+          meta: { transition: "fade" },
+        },
        
       ],
     },
