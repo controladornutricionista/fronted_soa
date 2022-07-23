@@ -65,7 +65,7 @@
             <span>{{ formatPEDate(slotProps?.data?.fechaPedido) }}</span>
           </template>
         </Column>
-        <Column field="horaPedidosssss" header="Hora de pedidosss">
+        <Column field="horaPedidosssss" header="Hora de pedidos">
           <template #body="slotProps">
             <span>{{ (slotProps?.data?.horaInicio) }}</span>
           </template>
@@ -122,7 +122,7 @@ const openRemove = (data) => {
     icon: "pi pi-exclamation-triangle",
     accept: async () => {
       const res = await store.dispatch("eliminarPedidos", data._id);
-      await store.dispatch("listarPedidos");
+      await store.dispatch("listarTodoPedidos");
       res &&
         toast.add({
           severity: "info",
@@ -135,7 +135,7 @@ const openRemove = (data) => {
 };
 
 onMounted(async () => {
-  await store.dispatch("listarPedidos");
+  await store.dispatch("listarTodoPedidos");
 });
 </script>
 

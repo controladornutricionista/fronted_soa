@@ -56,7 +56,7 @@
                 /><br />
                 <TextButton
                   :label="formLogin.button2.label"
-                  type="submit"
+                  type="button"
                   class="w-100 d-flex justify-content-center otro-color rounded2"
                   @click="openForm"
                 />
@@ -70,6 +70,15 @@
               </v-col>
             </v-row>
           </form>
+          <SidebarMenu ref="sidebar" title="Registrar Cliente">
+            <template #content>
+              <FormUser
+                @closeForm="closeForm"
+                @fetchUsers="$store.dispatch('listarEmpleados')"
+                :userEdited="editedUser"
+              />
+            </template>
+          </SidebarMenu>
         </div>
       </div>
     </div>
@@ -81,7 +90,7 @@ import CardLayout from "@/layouts/CardLayout.vue";
 import CopyRight from "@/components/CopyRight.vue";
 import TextButton from "@/components/buttons/TextButton.vue";
 import SidebarMenu from "@/components/SidebarMenu.vue";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import Button from "primevue/button";
@@ -89,19 +98,25 @@ import FormUser from "@/components/forms/FormUser.vue";
 import { momentDate } from "@/libs/dateFormat";
 import { useConfirm } from "primevue/useconfirm";
 
-const openForm = () => {
-  sidebar.value.open();
-};
+const editedUser = ref(null);
+
 export default {
   name: "LoginPage",
-  components: { CopyRight, TextButton },
+  components: { CopyRight, TextButton, SidebarMenu, FormUser },
   setup() {
     const store = useStore();
     const router = useRouter();
 
     const user = ref({ username: "", password: "" });
     const loading = ref(false);
-
+    const sidebar = ref();
+    const openForm = () => {
+      sidebar.value.open();
+    };
+    const closeForm = () => {
+      sidebar.value.close();
+      editedUser.value = null;
+    };
     const formLogin = computed(
       () => store.getters.dataBase?.forms?.login ?? {}
     );
@@ -170,6 +185,9 @@ export default {
 
       router.push({ name: "Home" });
     };
+    onMounted(async () => {
+      await store.dispatch("listarRoles");
+    });
 
     return {
       user,
@@ -177,6 +195,9 @@ export default {
       formLogin,
       inputStyle,
       logo,
+      sidebar,
+      closeForm,
+      openForm,
       validateMinMaxUsername,
       validateMinMaxPassword,
       signIn,

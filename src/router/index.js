@@ -79,7 +79,7 @@ const router = createRouter({
         {
           path: "/VistaPedidosPendientes",
           name: "VistaPedidosPendientes",
-          component: () => import("@/views/app/VistaMisPedidos"),
+          component: () => import("@/views/app/VistaPedidosPendientes"),
           meta: { transition: "fade" },
         },
        

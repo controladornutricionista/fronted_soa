@@ -138,6 +138,7 @@ import { useStore } from "vuex";
 import { computed, onMounted, onUpdated, ref, watch } from "vue";
 import { useToast } from "primevue/usetoast";
 import { loadImage } from "@/libs/loadImage";
+import moment from "moment-timezone";
 
 const store = useStore();
 const toast = useToast();
@@ -197,6 +198,7 @@ const actualizarTotal = () => {
   pedido.value.producto.precioFinal = total;
 };
 
+console.log(moment().tz("America/Lima").format("HH:mm"));
 const registrarPedido = async (creditNumber) => {
   try {
     displayModal.value = false;
@@ -204,8 +206,8 @@ const registrarPedido = async (creditNumber) => {
     const dto = {
       ...pedido.value,
       producto: JSON.parse(JSON.stringify(pedido.value.producto)),
-      fechaPedido: new Date().toISOString().substring(0, 10),
-      horaInicio: new Date().toISOString().substring(11, 16),
+      fechaPedido: new Date().toISOString(),
+      horaInicio: moment().tz("America/Lima").format("HH:mm"),
       usuario: store.getters?.getIdUser,
       estado: "Pendiente",
       numeroTarjeta: creditNumber,
