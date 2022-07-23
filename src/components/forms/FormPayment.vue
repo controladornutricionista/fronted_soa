@@ -16,7 +16,7 @@
           <label
             for="cc-name"
             class="text-xs tracking-wide uppercase font-semibold"
-            >Nombre de la tarjeta</label
+            >Titular de la tarjeta</label
           >
           <input
             id="cc-name"

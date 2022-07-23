@@ -2,7 +2,7 @@
   <form class="form__container" @submit.prevent="saveForm">
     <v-row>
       <v-col cols="12" class="pb-0" lg="12">
-        <h4>Datos del empleado</h4>
+        <h4>Datos del cliente</h4>
       </v-col>
       <v-col cols="12" class="pb-1" lg="6" md="12">
         <span>
